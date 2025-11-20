@@ -1,5 +1,5 @@
 #Hello someone /e wave
-#https://github.com/K0LP123/K0LPRoliTradeAd
+#https://github.com/K0LP7/K0LPRoliTradeAd
 #Started working on this discord bot on 17/09/2025 (dd/mm) :P - k0lp
 #Its a personal project but im sharing this if someone wants to use it or be inspired by it :D
 #Made this bc bot from Arachnid didnt have an option to add robux :C (and few other features)
@@ -974,3 +974,4 @@ if __name__ == "__main__":
         print("No discord token plz fix")
     else:
         bot.run(TOKEN)
+
