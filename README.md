@@ -23,8 +23,14 @@ https://discord.com/developers/applications
 https://youtube.com/clip/UgkxVbFqif0fQdPVUWKkz5qelvo1PnPwJ9eH?si=M_DX5bDQQV-Ccjla
 - Get a Discord Token by clicking this button
 <img width="400" height="100" alt="image" src="https://github.com/user-attachments/assets/aed532eb-bc2c-4573-bb6a-174306a17308" />
-- Edit your config file and paste AT LEAST your Discord Token here:
-      "TOKEN": "YourDiscordToken",
+
+- Edit your config file and paste AT LEAST your Discord Token here: <br>
+      "TOKEN": "YourDiscordToken",<br>
+      
+- When you do that you should be able to edit your config file from discord :D
+- To make trade ads you need to add your:<br>
+Rolimons Token (`!set rolitoken <token>`)<br>
+Player ID (`!set playerid <playerid>`)
 
 
 <h2>❗How to get Rolimons Token❗</h2>
