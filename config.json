@@ -16,7 +16,7 @@
         "upgrade",
         "downgrade",
         "demand",
-        "rap"
+        "any"
     ],
     "Presets": {
         "default": [
@@ -25,17 +25,9 @@
             "demand",
             "rap"
         ],
-        "adds1": [
-            "upgrade",
-            "downgrade",
-            "adds"
-        ],
-        "adds2": [
-            "adds",
-            "any"
-        ],
-        "adds3": [
+        "adds": [
             "adds"
         ]
     }
 }
+
