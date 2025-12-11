@@ -9,7 +9,7 @@
 <b>+Discord bot that lets you edit config file</b><br>
 <b>+Posts automatically every 25 minutes (default) for 24/7 </b>
 <h1>Documentation</h1>
-<h2>What do I need to run this bot?</h2>
+<h2>What do I need so I can run this bot?</h2>
 
 - Discord Bot
 - A machine u can host this thing on
@@ -23,7 +23,9 @@ https://discord.com/developers/applications
 https://youtube.com/clip/UgkxVbFqif0fQdPVUWKkz5qelvo1PnPwJ9eH?si=M_DX5bDQQV-Ccjla
 - Get a Discord Token by clicking this button
 <img width="400" height="100" alt="image" src="https://github.com/user-attachments/assets/aed532eb-bc2c-4573-bb6a-174306a17308" />
-- 
+- Edit your config file and paste AT LEAST your Discord Token here:
+      "TOKEN": "YourDiscordToken",
+
 
 <h2>❗How to get Rolimons Token❗</h2>
 To get your _RoliVerification= you need Cookie editor addon like this: <br>
