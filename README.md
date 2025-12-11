@@ -9,6 +9,8 @@
 <b>+Discord bot that lets you edit config file</b><br>
 <b>+Posts automatically every 25 minutes (default) for 24/7 </b>
 <h1>Documentation</h1>
+<h2>Help with commands</h2>
+At the moment only `!help` will help you :C<br>
 <h2>Uhhh what do i need to run this ??</h2>
 
 - Discord Bot
@@ -38,5 +40,3 @@ To get your _RoliVerification= you need Cookie editor addon like this: <br>
 https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm <br>
 <br>On Rolimons website open it and copy your _RoliVerification=
 <img width="630" height="520" alt="image" src="https://github.com/user-attachments/assets/6465d6bf-9419-4f29-9a1c-83dccfca714f" /><br>
-<h2>Help with commands</h2>
-At the moment only `!help` will help you :C
