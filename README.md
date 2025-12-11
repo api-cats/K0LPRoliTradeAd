@@ -5,6 +5,7 @@
 -Autopick (randomly picks 4 items with value over "minvalue" number)<br>
 -Top4<br>
 -Manualpick<br>
++Not For Trade option so bot doesnt post items u want to keep <br>
 <b>+Discord bot that lets you edit config file</b><br>
 <b>+Posts automatically every 25 minutes (default) for 24/7 </b>
 <h1>Documentation</h1> Right now use "!help" C:
