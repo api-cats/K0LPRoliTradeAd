@@ -22,7 +22,7 @@
 - Get a Discord Bot invite link and invite it to your server
 <br>https://youtube.com/clip/UgkxVbFqif0fQdPVUWKkz5qelvo1PnPwJ9eH?si=M_DX5bDQQV-Ccjla
 - Get a Discord Token by clicking this button
-<img width="400" height="100" alt="image" src="https://github.com/user-attachments/assets/aed532eb-bc2c-4573-bb6a-174306a17308" />
+<img width="600" height="150" alt="image" src="https://github.com/user-attachments/assets/aed532eb-bc2c-4573-bb6a-174306a17308" />
 
 - Edit your config file and paste AT LEAST your Discord Token here: <br>
       "TOKEN": "YourDiscordToken",<br>
