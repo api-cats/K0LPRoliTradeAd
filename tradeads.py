@@ -1,7 +1,6 @@
 #Hello someone /e wave
 #https://github.com/K0LP7/K0LPRoliTradeAd
-#Started working on this discord bot on 17/09/2025 (dd/mm) :P - k0lp
-#Its a personal project but im sharing this if someone wants to use it or be inspired by it :D
+#Started working on this discord bot on 2025/09/17
 #Made this bc bot from Arachnid didnt have an option to add robux :C (and few other features)
 import discord
 from discord.ext import commands
@@ -42,11 +41,10 @@ bot = commands.Bot(command_prefix="!", intents=intents, case_insensitive=True)
 #NFT command
 @bot.group(name="nft", invoke_without_command=True)
 async def nft(ctx):
-    await ctx.send("⚠️ Use `add`, `remove`, `list` or `clear`! Use `!help nft` for more details!")
+    await ctx.send("⚠️ Use `add`, `remove`, `list` or `clear`!")
 
 @nft.command(name="list") #NFT Embed List
 async def nft_list(ctx):
-
     config_file = load_config_file()
     NFT_Items=[]
     NonRolimonsApiItems=0
@@ -78,47 +76,43 @@ async def nft_list(ctx):
 
     await ctx.send(embed=nftembed) #Sends embed
 
-@nft.command(name="add") #NFT add
+@nft.command(name="add", aliases=["a"]) #NFT add
 async def NFTAdd(ctx, *, arg: str = None):
     if arg is None:
         await ctx.send("❌ Please provide an item ID or name to add!")
         return
-    
+       
     config_file = load_config_file()
-    
     if arg.isnumeric():
         if int(arg) in config_file["NotForTrade"]:
-            await ctx.send(f"❌ Item is already in NFT List.")
-            return
+            config_file["NotForTrade"].remove(int(arg))
+            save_config_file(config_file)  
+            await ctx.send(f'✅ {arg} has been added to NFT List!')
         else:
-            item_data = resIL["items"].get(str(int(arg)))
-            if item_data:
-                config_file["NotForTrade"].append(int(arg))
-                save_config_file(config_file)  
-                await ctx.send(f'✅ {arg} has been added to NFT List!')
-            else:
-                await ctx.send('❌ Couldnt find this ID in Rolimons API')
+            await ctx.send('❌ Item ID is already in NFT List.')
+            return
     else:
-        for key, value in resIL["items"].items():
-            if value[1].casefold() == arg.casefold() or value[0].casefold() == arg.casefold():
-                if int(key) not in config_file["NotForTrade"]:
-                    config_file["NotForTrade"].append(int(key))
+        for itemid, itemname in resIL["items"].items():
+            if (arg.casefold().strip() == itemname[1].casefold().strip() or  arg.casefold().strip() == itemname[0].casefold().strip()):
+                if int(itemid) not in config_file["NotForTrade"]:
+                    config_file["NotForTrade"].append(int(itemid))
                     save_config_file(config_file)  
-                    await ctx.send(f'✅ {value[1]} has been added to NFT List!')
+                    await ctx.send(f'✅ {itemname[0]} has been added to NFT List!')
                     return
                 else:
-                    await ctx.send(f"❌ Item is already in NFT List.")
+                    print('❌ Item is already in your NFT List')
+                    return
         else:
-            await ctx.send('❌ Couldnt find this name in Rolimons API')
+            await ctx.send('❌ Couldnt find this item in Rolimons API')
+            return
        
-@nft.command(name="remove") #NFT remove
+@nft.command(name="remove", aliases=["r"]) #NFT remove
 async def NFTRemove(ctx, *, arg: str = None):
     if arg is None:
         await ctx.send('❌ Please provide an item ID or name to remove!')
         return
     
     config_file = load_config_file()
-    
     if arg.isnumeric():
         if int(arg) in config_file["NotForTrade"]:
             config_file["NotForTrade"].remove(int(arg))
@@ -126,21 +120,19 @@ async def NFTRemove(ctx, *, arg: str = None):
             await ctx.send(f'✅ {arg} has been removed from NFT List!')
         else:
             await ctx.send('❌ Couldnt find this ID in your NFT List')
+            return
     else:
-        for key, value in resIL["items"].items():
-            if value[1].casefold() == arg.casefold() or value[0].casefold() == arg.casefold():
-                if int(key) in config_file["NotForTrade"]:
-                    config_file["NotForTrade"].remove(int(key))
+        for itemid, itemname in resIL["items"].items():
+            if (arg.casefold().strip() == itemname[1].casefold().strip() or  arg.casefold().strip() == itemname[0].casefold().strip()):
+                if int(itemid) in config_file["NotForTrade"]:
+                    config_file["NotForTrade"].remove(int(itemid))
                     save_config_file(config_file)  
-                    await ctx.send(f'✅ {value[1]} has been removed from NFT List!')
+                    await ctx.send(f'✅ {itemname[0]} has been removed from NFT List!')
                 else:
-                    await ctx.send('❌ Couldnt find this name in your NFT List')
+                    await ctx.send('❌ Couldnt find this item in your NFT List')
                 return
         else:
-            await ctx.send('❌ Couldnt find this name in Rolimons API')
-
-        if int(arg) not in config_file["NotForTrade"]:
-            await ctx.send(f"❌ ID isnt in the NFT List.")
+            await ctx.send('❌ Couldnt find this item in Rolimons API')
             return
 
 @nft.command(name="clear") #NFT clear
@@ -155,7 +147,7 @@ async def NFTClear(ctx, *, arg: str = None):
 #Tags command
 @bot.group(name="tags", aliases=["tag"], invoke_without_command=True)
 async def tags(ctx):
-    await ctx.send('❌ Use `add`, `remove`, `list`, `clear` or `set`! Use `!help tags` for more details!')
+    await ctx.send('❌ Use `add`, `remove`, `list`, `clear` or `set`!')
 
 @tags.command(name="list") #Tags Embed List
 async def TagsList(ctx):
@@ -168,7 +160,7 @@ async def TagsList(ctx):
 
     await ctx.send(embed=tagsembed) #Sends embed
 
-@tags.command(name="add") #Tags add
+@tags.command(name="add", aliases=["a"]) #Tags add
 async def TagsAdd(ctx, *, arg: str = None):
     if arg is None:
         await ctx.send("❌ Forgot the tag! Use `tags list` to see list of tags.")
@@ -193,7 +185,7 @@ async def TagsAdd(ctx, *, arg: str = None):
     else:
         await ctx.send("❌ Theres 4 tags already!")
 
-@tags.command(name="remove") #Tags remove
+@tags.command(name="remove", aliases=["r"]) #Tags remove
 async def TagsRemove(ctx, *, arg: str = None):
     if arg is None:
         await ctx.send("❌ Forgot the tag! Use `tags list` to see list of tags.")
@@ -217,70 +209,8 @@ async def TagsClear(ctx, *, arg: str = None):
     save_config_file(config_file)
     await ctx.send("✅ Tags have been cleared!")
 
-
-#Preset command        
-@bot.group(name="preset", aliases=["presets"], invoke_without_command=True)
-async def preset(ctx, arg1: str = None, arg2: str = None, arg3: str = None):
-    if arg1 != None:
-        config_file = load_config_file()
-        if arg1.casefold() in config_file["Presets"]:
-            if arg2.casefold() =="add":
-                if len(config_file["Presets"][f"{arg1.casefold()}"]) < 4:
-                    if arg3 in AllTags:
-                        if arg3 not in config_file["Presets"][f"{arg1.casefold()}"]:
-                            config_file["Presets"][f"{arg1.casefold()}"].append(f"{arg3.casefold()}")
-                            save_config_file(config_file)
-                            await ctx.send(f'✅ {arg3.casefold()} has been added to {arg1} preset!')
-                        else:
-                            await ctx.send(f'❌ This tag is already in {arg1} preset!')           
-                    else:
-                        await ctx.send('❌ Couldnt find this tag! Use `!tags list` for list of tags.')           
-                else:
-                    await ctx.send('❌ Theres more than 4 tags in this preset! Remove at least one to add more.')
-
-            elif arg2.casefold() =="remove":
-                if arg3 in config_file["Presets"][f"{arg1.casefold()}"]:
-                    if arg3 in AllTags:
-                        config_file["Presets"][f"{arg1.casefold()}"].remove(f"{arg3.casefold()}")
-                        save_config_file(config_file)
-                        await ctx.send(f'✅ {arg3.casefold()} has been removed from {arg1} preset!')
-                    else:
-                        await ctx.send('❌ Couldnt find this tag! Use `!tags list` for list of tags.')
-                else:
-                    await ctx.send(f'❌ This tag isnt in {arg1} preset!')
-
-            elif arg2 == None:
-                await ctx.send('❌ Use `!preset <preset> <add/remove> <tag>`! Use `!help preset` for more details.')
-                
-            return
-        else:
-            await ctx.send('❌ Use `add`, `remove`, `list` or preset you want to change! Use `!help tags presets` for more details.')
-
-    else: 
-        await ctx.send('❌ Use `add`, `remove`, `<preset>` or `list`! Use `!help preset` for more details.')
-
-@preset.command(name="list")
-async def presetlist(ctx):
-    config_file=load_config_file()
-    Presets=[]
-    PresetList=""
-    for item in config_file["Presets"]:
-        Presets.append(item)
-    for item in Presets:
-        PresetList += f"**{item}**:\n"
-        for item in config_file['Presets'][f'{item}']:
-            PresetList += f"- {item}\n"
-
-    presetembed = discord.Embed(
-        title="🏷️ Tag Presets",
-        color=0x33cc66,
-    )
-    presetembed.add_field(name="", value=PresetList, inline=True)
-
-    await ctx.send(embed=presetembed) #Sends embed
-
-@preset.command(name="set")
-async def presetset(ctx, *, arg: str = None):
+@tags.command(name="set")
+async def Tagsset(ctx, *, arg: str = None):
     config_file=load_config_file()
     if arg in config_file["Presets"]:
         config_file["Tags"] = config_file["Presets"][f"{arg.lower()}"]
@@ -292,35 +222,6 @@ async def presetset(ctx, *, arg: str = None):
         await ctx.send(f"❌ Preset doesnt exist!")
         return
     
-    await ctx.send("❌ Check `!tags set list` for list of presets!")
-
-@preset.command(name="add") #preset add
-async def presetadd(ctx, *, arg: str = None):
-    if arg is None:
-        await ctx.send("❌ Forgot the parameter! Use `!help tags presets`.")
-        return
-    else:
-        if arg not in config_file["Presets"]:
-            config_file["Presets"][arg] = []
-            save_config_file(config_file)
-            await ctx.send(f"✅ {arg} preset has been added! Use `!preset <preset> <add/remove> <tag>` to add/remove tags.")
-        else:
-            await ctx.send("❌ Preset already exists! Use `!preset <preset> <add/remove> <tag>` to add/remove tags.")
-    
-@preset.command(name="remove") #preset remove
-async def presetremove(ctx, *, arg: str = None):
-    if arg is None:
-        await ctx.send("❌ Forgot the parameter! Use `!help tags presets`.")
-        return
-    else:
-        if arg in config_file["Presets"]:
-            del config_file["Presets"][arg]
-            save_config_file(config_file)
-            await ctx.send(f"✅ {arg} preset has been removed!")
-        else:
-            await ctx.send("❌ Couldnt find this preset! Use `!preset list to see all presets.")
-
-
 
 #Config command        
 @bot.command(name="config") 
@@ -434,41 +335,11 @@ async def config_command(ctx):
     await ctx.send(embed=configembed) #sends embed
 
 
-@bot.command(name="inv") 
-async def inv_command(ctx):
-
-    CheckHold=[]
-    Items=[]
-
-    responsePI = requests.get(urlPI)
-    res_PI = responsePI.json() 
-    for ItemsHold in res_PI.get("data"):
-        CheckHold.append(((ItemsHold.get("assetId"), ItemsHold.get("userAssetId"), ItemsHold.get("isOnHold"))))
-    for item in CheckHold:
-        item_data = resIL["items"].get(str(item[0]))
-        if item_data:
-            if item_data[1] != "": #Checks if theres an acronym and if there is it picks it
-                Item_Name = item_data[1]
-            else:
-                Item_Name=item_data[0]# If there isnt sets item name
-            value=item_data[4]
-            Items.append((((Item_Name, value, item[1], item[0], item[2]))))
-    Invsort = [(item[0], item[1], item[2], item[3], item[4]) for item in sorted(Items, key=lambda x: x[1], reverse=True)]       
-    InvList=""
-    for item in Invsort:
-        if len(InvList) > 1800:
-            await ctx.send(InvList)
-            InvList=""
-            InvList+=f"{item[0]} | Value: {item[1]} | ID: `{item[3]}` | Hold:{item[4]} | UIAD: [{item[2]}](https://www.rolimons.com/uaid/{item[2]})\n"
-        else:
-            InvList+=f"{item[0]} | Value: {item[1]} | ID: `{item[3]}` | Hold:{item[4]} | UIAD: [{item[2]}](https://www.rolimons.com/uaid/{item[2]})\n"
-    await ctx.send(InvList)
-
 
 #Set command
 @bot.group(name="set", invoke_without_command=True)
 async def set(ctx):
-    await ctx.send('❌ Wrong option! Use `!help set` for more details!')
+    await ctx.send('❌ Wrong option!')
 
 @set.command(name="autopick") #Set Autopick
 async def SetAutopick(ctx):
@@ -505,45 +376,59 @@ async def SetManualPick(ctx):
     save_config_file(config_file)
     await ctx.send('✅ ManualPick has been picked!')
 
-@set.command(name="minvalue") #Set MinValue
+@set.command(name="minvalue", aliases=["minval", "minimumvalue"]) #Set MinValue
 async def SetMinValue(ctx, *, arg: str = None):
     config_file = load_config_file()
-    if arg.isnumeric():
-        config_file["MinValue"] = int(arg)
-        save_config_file(config_file)
-        await ctx.send(f'✅ Minvalue has been set to: `{arg}`')
+    if arg != None:
+        if arg.isnumeric():
+            config_file["MinValue"] = int(arg)
+            save_config_file(config_file)
+            await ctx.send(f'✅ Minvalue has been set to: `{arg}`')
+        else:
+            await ctx.send('❌ This isnt a number')
+            return 
     else:
-        await ctx.send('❌ This isnt a number')
+        await ctx.send('❌ You need to type a number')
 
 @set.command(name="playerid") #Set PlayerID
 async def SetPlayerID(ctx, *, arg: str = None):
     config_file = load_config_file()
-    if arg.isnumeric():
-        config_file["PlayerID"] = int(arg)
-        save_config_file(config_file)
-        await ctx.send(f'✅ PlayerID has been set to: `{arg}`')
+    if arg != None:
+        if arg.isnumeric():
+            config_file["PlayerID"] = int(arg)
+            save_config_file(config_file)
+            await ctx.send(f'✅ PlayerID has been set to: `{arg}`')
+        else:
+            await ctx.send('❌ This isnt a number')
     else:
-        await ctx.send('❌ This isnt a number')
+        await ctx.send('❌ You need to type a number')
 
 @set.command(name="robux") #Set Robux
 async def SetRobux(ctx, *, arg: str = None):
     config_file = load_config_file()
-    if arg.isnumeric():
-        config_file["Robux"] = int(arg)
-        save_config_file(config_file)
-        await ctx.send(f'✅ Robux has been set to: `{arg}`')
+    if arg != None:
+        if arg.isnumeric():
+            config_file["Robux"] = int(arg)
+            save_config_file(config_file)
+            await ctx.send(f'✅ Robux has been set to: `{arg}`')
+        else:
+            await ctx.send('❌ This isnt a number')
+            return
     else:
-        await ctx.send('❌ This isnt a number')
+        await ctx.send('❌ You need to type a number')
 
 @set.command(name="time") #Set Time
 async def SetTime(ctx, *, arg: str = None):
     config_file = load_config_file()
-    if arg.isnumeric():
-        config_file["Time"] = int(arg)
-        save_config_file(config_file)
-        await ctx.send(f'✅ Time has been set to: `{arg}` seconds')
+    if arg != None:
+        if arg.isnumeric():
+            config_file["Time"] = int(arg)
+            save_config_file(config_file)
+            await ctx.send(f'✅ Time has been set to: `{arg}` seconds')
+        else:
+            await ctx.send('❌ This isnt a number')
     else:
-        await ctx.send('❌ This isnt a number')
+        await ctx.send('❌ You need to type a number')
 
 @set.command(name="top4") #Set Top4
 async def SetAutopick(ctx):
@@ -555,7 +440,6 @@ async def SetAutopick(ctx):
 
 @set.command(name="rolitoken") #Set Rolimons Token
 async def SetRoliToken(ctx, *, arg: str = None):
-
     config_file = load_config_file()
     config_file["RolimonsToken"] = arg
     save_config_file(config_file)
@@ -573,15 +457,15 @@ async def SetChannel(ctx, *, arg: str = None):
 #Items Command
 @bot.group(name="items", aliases=["item"], invoke_without_command=True)
 async def items(ctx):
-    await ctx.send('❌ Use `offered <option>` or `requested <option>`. Check `!help items` for more!')
+    await ctx.send('❌ Use `offered <option>` or `requested <option>`.')
 
 
 #Items Offered
 @items.group(name="offered", aliases=["o"], invoke_without_command=True) #Items offered
 async def itemsoffered(ctx):
-    await ctx.send('❌ Use `add`, `clear` or `remove`. Check `!help items` for more!')
+    await ctx.send('❌ Use `add`, `clear` or `remove`.')
 
-@itemsoffered.command(name="add") #Items offered add
+@itemsoffered.command(name="add", aliases=["a"]) #Items offered add
 async def itemsofferedadd(ctx, *, arg: str = None):
     if arg is None:
         await ctx.send('❌ Please provide an item ID or name to add')
@@ -599,7 +483,6 @@ async def itemsofferedadd(ctx, *, arg: str = None):
                     await ctx.send('❌ Couldnt find this ID in Rolimons API')
         else:
             for key, value in resIL["items"].items():
-                print(key, value)
                 if value[1].casefold() == arg.casefold() or value[0].casefold() == arg.casefold():
                     config_file["OfferedItems"].append(int(key))
                     save_config_file(config_file)  
@@ -610,7 +493,7 @@ async def itemsofferedadd(ctx, *, arg: str = None):
     else:
         await ctx.send('❌ Theres 4 IDs in Offered Items!')            
 
-@itemsoffered.command(name="remove") #Items offered remove
+@itemsoffered.command(name="remove", aliases=["r"]) #Items offered remove
 async def itemsofferedremove(ctx, *, arg: str = None):
     if arg is None:
         await ctx.send('❌ Please provide an item ID or name to remove')
@@ -649,9 +532,9 @@ async def itemsofferedclear(ctx, *, arg: str = None):
 #Items Requested
 @items.group(name="requested", aliases=["r"], invoke_without_command=True) #Items offered
 async def itemsrequested(ctx):
-    await ctx.send('❌ Use `add`, `clear` or `remove`. Check `!help items` for more!')
+    await ctx.send('❌ Use `add`, `clear` or `remove`.')
 
-@itemsrequested.command(name="add") #Items offered add
+@itemsrequested.command(name="add", aliases=["a"]) #Items offered add
 async def itemsrequestedadd(ctx, *, arg: str = None):
     if arg is None:
         await ctx.send('❌ Please provide an item ID to remove')
@@ -679,7 +562,7 @@ async def itemsrequestedadd(ctx, *, arg: str = None):
     else:
         await ctx.send('❌ Theres 4 IDs in Requested Items!') 
 
-@itemsrequested.command(name="remove") #Items offered remove
+@itemsrequested.command(name="remove", aliases=["r"]) #Items offered remove
 async def itemsrequestedremove(ctx, *, arg: str = None):
     if arg is None:
         await ctx.send('❌ Please provide an item ID or name to remove')
@@ -717,30 +600,21 @@ async def itemsrequestedclear(ctx, *, arg: str = None):
 #Help command
 bot.remove_command('help')
 @bot.group(name="help", invoke_without_command=True)
-async def help(ctx, *, arg: str = None):
-    if arg == None:
-        nftembed = discord.Embed(
-            title="📝 Help",
-            description='List of all commands with options avaible in this discord bot.\nUse `!help <command>` for more details and examples.',
-            color=0x33cc66
-        )
-        nftembed.add_field(name="inv", value="", inline=False)
-        nftembed.add_field(name="config", value="", inline=False)
-        nftembed.add_field(name="items/item:", value="offered/o or requested/r \n- `add <id/name>`\n- `remove <id/name>`\n- `clear`\n", inline=False)
-        nftembed.add_field(name="tags/tag", value="`add <tag>`\n`remove <tag>`\n`clear`\n`list`\n", inline=False)
-        nftembed.add_field(name="preset/presets", value="`<presetname> <add/remove> <tag>`\n`set <preset>`\n`add <preset>`\n`remove <preset>`\n`list`\n", inline=False)
-        nftembed.add_field(name="set", value="`autopick`\n`channel`\n`demandonly <true/false>`\n`manualpick/manual`\n`minvalue <number>`\n`playerid <id>`\n`robux <number>`\n`time <number> (in seconds)`\n`rolitoken <token>`\n`top4`", inline=False)
-        nftembed.add_field(name="nft", value='`add <id/name>`\n`remove <id/name>`\n`clear`\n`list`', inline=False)
-
-        #nftembed.add_field(name="help", value="`None`\n`items`\n`set`\n`nft`\n`tags`\n`config`", inline=False)
-
-        await ctx.send(embed=nftembed)
-    if arg != None:
-        await ctx.send("W.I.P but reaaaaaallly long progress bc i dont wanna :P") 
-
+async def help(ctx):
+    nftembed = discord.Embed(
+        title="📝 Help",
+        description='List of all commands with options avaible in this discord bot.\n',
+        color=0x33cc66
+    )
+    nftembed.add_field(name="config", value="", inline=False)
+    nftembed.add_field(name="items/item:", value="offered/o or requested/r \n- `add/a <id/name>`\n- `remove/r <id/name>`\n- `clear`\n", inline=False)
+    nftembed.add_field(name="nft", value='`add/a <id/name>`\n`remove/r <id/name>`\n`clear`\n`list`', inline=False)
+    nftembed.add_field(name="tags/tag", value="`add/a <tag>`\n`remove/r <tag>`\n`clear`\n`list`\n`set <preset>`\n", inline=False)
+    nftembed.add_field(name="set", value="`autopick`\n`channel`\n`demandonly <true/false>`\n`manualpick/manual`\n`minvalue/minimumvalue/minval <number>`\n`playerid <id>`\n`robux <number>`\n`time <number> (in seconds)`\n`rolitoken <token>`\n`top4`", inline=False)
+    await ctx.send(embed=nftembed)
 
 #Hello again someone
-#Last change of discord bot was on 20/11/2025 :P (dd/mm)
+#Last change of discord bot was on 11/12/2025 :P (dd/mm)
 
 #Start of Trade Ad maker
 #Started working on this on 21/09/2025 :D (dd/mm)
@@ -756,31 +630,18 @@ async def trade_ad_loop():
             channel = bot.get_channel(channel_id)
         else:
             print("⚠️  Discord Channel not found! Check if you typed correct id or use !set channel <id> to set it!")
-        #I should just replace almost all but im too lazy for that 🤤
-        RolimonsToken = config_file["RolimonsToken"]
-        Top4 = config_file["Top4"]
-        AutoPick = config_file["AutoPick"]
-        Minvalue = config_file["MinValue"]
-        NotForTrade = config_file["NotForTrade"]
-        OfferedItems = config_file["OfferedItems"]
-        Robux = config_file["Robux"]
-        RequestedItems = config_file["RequestedItems"]
-        PlayerId = config_file["PlayerID"]
-        Tags=config_file["Tags"]
-        Time=config_file["Time"]
-        DemandOnly=config_file["DemandOnly"]
 
         data = {
-            "offer_item_ids": OfferedItems,
-            "offer_robux": Robux,
-            "player_id": PlayerId,
-            "request_item_ids": RequestedItems,
-            "request_tags": Tags
+            "offer_item_ids": config_file["OfferedItems"],
+            "offer_robux": config_file["Robux"],
+            "player_id": config_file["PlayerID"],
+            "request_item_ids": config_file["RequestedItems"],
+            "request_tags": config_file["Tags"]
         }
 
         headers = {
             "content-type": "application/json",
-            "cookie": "_RoliVerification=" + RolimonsToken
+            "cookie": "_RoliVerification=" + config_file["RolimonsToken"]
         }
 
         responsePI = requests.get(urlPI)
@@ -788,46 +649,44 @@ async def trade_ad_loop():
         responseIL = requests.get(urlIL)
         res_IL = responseIL.json()
 
-        #NotOnthold=[]
         ItemValues=[]
-        
-        if Top4 == "true" or AutoPick == "true":
+        if config_file["Top4"] == "true" or config_file["AutoPick"] == "true":
             dataIH = res_PI.get("data")
             for ItemsHold in dataIH:
                 ItemID = ItemsHold.get("assetId")
                 if ItemsHold.get("isOnHold") is True:
                     continue
-                if ItemID in NotForTrade:
+                if ItemID in config_file["NotForTrade"]:
                     continue
                 item_data = res_IL["items"].get(str(ItemID))
                 if item_data:
                     value=item_data[4]
                     rap=item_data[2]
-                    if DemandOnly == "true" and item_data[5] <= 0:#item_data[5] is demand in roli api
+                    if config_file["DemandOnly"] == "true" and item_data[5] <= 0:#item_data[5] is demand in roli api
                         continue
-                    if AutoPick == "true" and value < Minvalue:
+                    if config_file["AutoPick"] == "true" and value < config_file["MinValue"]:
                         continue
                     ItemValues.append((ItemID, value, rap))
-            if Top4 == "true":
+            if config_file["Top4"] == "true":
                 Top4List = [ItemID for ItemID, _, _ in sorted(ItemValues, key=lambda x: x[1], reverse=True)[:4]]
                 data["offer_item_ids"] = Top4List
             
-            elif AutoPick == "true":
+            elif config_file["AutoPick"] == "true":
                 if len(ItemValues) >= 4:
                     AutoPickList = [ItemID for ItemID, _, _ in sorted(random.sample(ItemValues, 4), key=lambda x: x[1], reverse=True)]
                 else:
                     AutoPickList = [ItemID for ItemID, _, _ in sorted(ItemValues, key=lambda x: x[1], reverse=True)]
                 data["offer_item_ids"] = AutoPickList
         
-        if Robux <= 0: #u cant make a trade ad when robux are set to 0
+        if config_file["Robux"] <= 0: #u cant make a trade ad when robux are set to 0
             del data["offer_robux"]
 
         #Foolproofing Requesteds👀
         if config_file["Tags"] == [] and config_file["RequestedItems"] ==[]:
-            config_file["Tags"] = config_file["default"]
-            data["request_tags"] = config_file["default"]
+            config_file["Tags"] = config_file["Presets"]["default"]
+            data["request_tags"] = config_file["Presets"]["default"]
             save_config_file(config_file)
-            await channel.send('❌ YOU FORGOT TO ADD TAGS AND REQUESTED ITEMS 🤬 Set tags to default tho 🤤 @everyone')
+            await channel.send('❌ There are no tags or items set 🤬 Changed tags to default tho 🤤 @everyone')
 
         if len(config_file["Tags"]) + len(config_file["RequestedItems"]) >4:
             if len(config_file["RequestedItems"]) >1:
@@ -853,23 +712,23 @@ async def trade_ad_loop():
             OffItems = []
             OffItemslist =[]
 
-            if Top4 == "true":
+            if config_file["Top4"] == "true":
                 TradeMode = "Top4"
-            elif AutoPick ==   "true":
+            elif config_file["AutoPick"] ==   "true":
                 TradeMode = "Autopick"
             else:
                 TradeMode = "Manualpick"
-            if DemandOnly =="true" and TradeMode != "Manualpick":
+            if config_file["DemandOnly"] =="true" and TradeMode != "Manualpick":
                 TradeMode += " with DemandOnly"
 
             Logs += (f"✅ Trade ad Posted! ({TradeMode})\n\n")
 
-            if Top4 == "true" :
+            if config_file["Top4"] == "true" :
                 OffItems = Top4List
-            elif AutoPick == "true":
+            elif config_file["AutoPick"] == "true":
                 OffItems = AutoPickList
             else: 
-                OffItems = OfferedItems
+                OffItems = config_file["OfferedItems"]
             for item in OffItems:
                 item_data = res_IL["items"].get(str(item))
                 if item_data:
@@ -888,9 +747,9 @@ async def trade_ad_loop():
                 OffItemsPrint += f"{line}\n"
             Logs += (f"{OffItemsPrint}\n")
 
-            if RequestedItems:
+            if config_file["RequestedItems"]:
                 ReqItems = []
-                for line in RequestedItems:
+                for line in config_file["RequestedItems"]:
                     item_data = res_IL["items"].get(str(line))
                     if item_data[1] == "":
                         ReqItems.append(f"- {item_data[0]} | Value: {item_data[4]}")
@@ -910,11 +769,11 @@ async def trade_ad_loop():
             if TagsText:
                 Logs += (f"🔍 Tags:\n{TagsText}\n")
 
-            if Robux > 0:
-                Logs += (f"💲 Robux: {Robux}\n\n")
+            if config_file["Robux"] > 0:
+                Logs += (f"💲 Robux: {config_file["Robux"]}\n\n")
 
-            future_time = datetime.now() + timedelta(seconds=Time)   
-            Logs +=(f"🕒 Next Trade Ad will be posted in: {Time / 60} minutes, Aka: {future_time.strftime('%H:%M')}\n")
+            future_time = datetime.now() + timedelta(seconds=config_file["Time"])   
+            Logs +=(f"🕒 Next Trade Ad will be posted in: {config_file["Time"] / 60} minutes, Aka: {future_time.strftime('%H:%M')}\n")
 
             #Sends Trade ad into discord channel and terminal
             print(Logs)
@@ -923,7 +782,7 @@ async def trade_ad_loop():
 
         ErrorLogs =""     
         if res_TA.get("success") == False:
-            future_time = datetime.now() + timedelta(seconds=Time)
+            future_time = datetime.now() + timedelta(seconds=config_file["Time"])
             if res_TA.get("code") == 7105:
                 ErrorLogs +=(f"⏳ Ad creation cooldown has not elapsed ⏳\n🕒 Next try will be at: {future_time.strftime('%H:%M')} 🕒")
     
@@ -949,10 +808,10 @@ async def trade_ad_loop():
             if channel:
                 await channel.send(ErrorLogs)
 
-        await asyncio.sleep(int(Time))
+        await asyncio.sleep(int(config_file["Time"]))
 
 #Hello hello again
-#Last change of Trade Ad Thingy was on 22/10/2025 :P (dd/mm)
+#Last change of Trade Ad Thingy was on 11/12/2025 :P (dd/mm)
 
 #Errors
 @bot.event
