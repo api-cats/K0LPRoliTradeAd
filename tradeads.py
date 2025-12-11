@@ -609,8 +609,8 @@ async def help(ctx):
     nftembed.add_field(name="config", value="", inline=False)
     nftembed.add_field(name="items/item:", value="offered/o or requested/r \n- `add/a <id/name>`\n- `remove/r <id/name>`\n- `clear`\n", inline=False)
     nftembed.add_field(name="nft", value='`add/a <id/name>`\n`remove/r <id/name>`\n`clear`\n`list`', inline=False)
-    nftembed.add_field(name="tags/tag", value="`add/a <tag>`\n`remove/r <tag>`\n`clear`\n`list`\n`set <preset>`\n", inline=False)
-    nftembed.add_field(name="set", value="`autopick`\n`channel`\n`demandonly <true/false>`\n`manualpick/manual`\n`minvalue/minimumvalue/minval <number>`\n`playerid <id>`\n`robux <number>`\n`time <number> (in seconds)`\n`rolitoken <token>`\n`top4`", inline=False)
+    nftembed.add_field(name="tags/tag", value="`add/a <tag>`\n`remove/r <tag>`\n`set <preset>`\n`clear`\n`list`\n", inline=False)
+    nftembed.add_field(name="set", value="`autopick`\n`top4`\n`channel`\n`demandonly <true/false>`\n`manualpick/manual`\n`minvalue/minimumvalue/minval <number>`\n`playerid <id>`\n`robux <number>`\n`time <number> (in seconds)`\n`rolitoken <token>`", inline=False)
     await ctx.send(embed=nftembed)
 
 #Hello again someone
@@ -833,4 +833,5 @@ if __name__ == "__main__":
         print("No discord token plz fix")
     else:
         bot.run(TOKEN)
+
 
