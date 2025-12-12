@@ -20,7 +20,7 @@ At the moment only '!help' will help you :C<br>
 - Discord Bot
 - Python
 - pip install requests
-- pip install discord
+- pip install discord.py
 - A machine u can host this thing on
 - Your <b>ROLIMONS<b> Cookie
 - Your Roblox User ID
