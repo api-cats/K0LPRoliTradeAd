@@ -33,6 +33,9 @@ At the moment only '!help' will help you :C<br>
 - Get a Discord Bot Token by clicking this button
 <img width="600" height="150" alt="image" src="https://github.com/user-attachments/assets/aed532eb-bc2c-4573-bb6a-174306a17308" />
 
+- In Bot page scroll a bit down and turn these 3 on
+
+
 - I recommend to also get an app like Visual Studio Code so you can see errors if there are any
 - Edit your config file and paste AT LEAST your:
   <br>❗These arent valid so dont use them❗
