@@ -34,12 +34,7 @@ At the moment only '!help' will help you :C<br>
 <img width="600" height="150" alt="image" src="https://github.com/user-attachments/assets/aed532eb-bc2c-4573-bb6a-174306a17308" />
 
 - In Bot page scroll a bit down and turn these 3 on:"<br>
-
-SERVER MEMBERS INTENT <br>
-
-MESSAGE CONTENT INTENT <br>
-
-PRESENCE INTENT <br>
+<img width="500" height="150" alt="image" src="https://github.com/user-attachments/assets/7bccf870-1fb0-4551-8b12-683682c57896" />
 
 
 - I recommend to also get an app like Visual Studio Code so you can see errors if there are any
