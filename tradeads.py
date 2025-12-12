@@ -100,7 +100,8 @@ async def NFTAdd(ctx, *, arg: str = None):
                     await ctx.send(f'✅ {itemname[0]} has been added to NFT List!')
                     return
                 else:
-                    print('❌ Item is already in your NFT List')
+                    await ctx.send('❌ Item is already in your NFT List')
+
                     return
         else:
             await ctx.send('❌ Couldnt find this item in Rolimons API')
@@ -827,6 +828,7 @@ if __name__ == "__main__":
         print("No discord token plz fix")
     else:
         bot.run(TOKEN)
+
 
 
 
