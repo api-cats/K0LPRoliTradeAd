@@ -1,4 +1,4 @@
-If there happen to be any bug <b>WITH THE BOT</b> u can dm me on discord: k0lp
+If there happens to be any bug <b>WITH THE BOT</b> u can dm me on discord: k0lp
 <h1>Rolimons Trade Ad Bot</h1>
 <img width="500" height="600" alt="image" src="https://github.com/user-attachments/assets/64b6fa99-f725-47b0-a806-dd09d8a37b23" /><br>
 <img width="500" height="200" alt="image" src="https://github.com/user-attachments/assets/7e32eaa9-fc8c-43a6-a732-56f0dba79176" />
@@ -19,8 +19,8 @@ At the moment only '!help' will help you :C<br>
 
 - Discord Bot
 - Python
-- pip install requests
-- pip install discord.py
+- pip install requests ❗
+- pip install discord.py ❗
 - A machine u can host this thing on
 - Your <b>ROLIMONS<b> Cookie
 - Your Roblox User ID
