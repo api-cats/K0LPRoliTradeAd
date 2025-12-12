@@ -1,5 +1,7 @@
 <h1>Rolimons Trade Ad Bot</h1>
-<img width="500" height="600" alt="image" src="https://github.com/user-attachments/assets/64b6fa99-f725-47b0-a806-dd09d8a37b23" />
+<img width="500" height="400" alt="image" src="https://github.com/user-attachments/assets/64b6fa99-f725-47b0-a806-dd09d8a37b23" />
+<img width="500" height="183" alt="image" src="https://github.com/user-attachments/assets/7e32eaa9-fc8c-43a6-a732-56f0dba79176" />
+
 <h1>About this bot:</h1>
 <b>+3 modes:<br></b>
 - Autopick (randomly picks 4 items with value over "minvalue" number)<br>
