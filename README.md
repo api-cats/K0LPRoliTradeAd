@@ -45,9 +45,6 @@ At the moment only '!help' will help you :C<br>
   Example "RolimonsToken": "9FDH9shffsfSDUYG87ysgf8GFSyfuJ9.eaJ2ZXJzaW9uIfJWFJ983HF43HGUYHDFGUSYGUYSDGJpZCI6MTA2NzgyMTE444xNzcwMTQ3MdfQ.qlUbTr4j4gADJiojoijeefeGEDGBxc", <br>
 
 - When you do that you should be able to run tradeads.py :D
-- To make trade ads you need to add your:<br>
-Rolimons Token (`!set rolitoken <token>`)<br>
-Player ID (`!set playerid <playerid>`)
 
 <h2>❗How to get Rolimons Cookie❗</h2>
 To get your _RoliVerification= you need Cookie editor addon like this: <br>
