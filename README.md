@@ -39,7 +39,7 @@ At the moment only '!help' will help you :C<br>
 - Roblox User ID: <br>
   Example: "PlayerID": 1067821187, <br>
 - Rolimons Cookie: <br>
-  Example "RolimonsToken": "9FDH9shffsfSDUYG87ysgf8GFSyfuJ9.eaJ2ZXJzaW9uIfJWFJ983HF43HGUYHDFGUSYGUYSDGJpZCI6MTA2NzgyMTE444xNzcwMTQ3MdfQ.qlUbTr4j4gADJiojoijeefeGEDGBxc", <br>
+  <br><br>Example "RolimonsToken": "9FDH9shffsfSDUYG87ysgf8GFSyfuJ9.eaJ2ZXJzaW9uIfJWFJ983HF43HGUYHDFGUSYGUYSDGJpZCI6MTA2NzgyMTE444xNzcwMTQ3MdfQ.qlUbTr4j4gADJiojoijeefeGEDGBxc", <br>
 These arent valid so dont check them 
    
 - When you do that you should be able to run tradeads.py :D
