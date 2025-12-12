@@ -12,7 +12,7 @@
 <b>+Posts automatically every 25 minutes (default) for 24/7 </b>
 <h1>Documentation</h1>
 <h2>Help with commands</h2>
-At the moment only `!help` will help you :C<br>
+At the moment only '!help' will help you :C<br>
 <h2>Uhhh what do i need to run this ??</h2>
 
 - Discord Bot
