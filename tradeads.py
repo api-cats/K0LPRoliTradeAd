@@ -723,13 +723,7 @@ async def trade_ad_loop():
 
             Logs += (f"✅ Trade ad Posted! ({TradeMode})\n\n")
 
-            if config_file["Top4"] == "true" :
-                OffItems = Top4List
-            elif config_file["AutoPick"] == "true":
-                OffItems = AutoPickList
-            else: 
-                OffItems = config_file["OfferedItems"]
-            for item in OffItems:
+            for item in data["offer_item_ids"]:
                 item_data = res_IL["items"].get(str(item))
                 if item_data:
                     TotalValue += item_data[4]
@@ -833,5 +827,6 @@ if __name__ == "__main__":
         print("No discord token plz fix")
     else:
         bot.run(TOKEN)
+
 
 
