@@ -36,12 +36,11 @@ At the moment only `!help` will help you :C<br>
 Rolimons Token (`!set rolitoken <token>`)<br>
 Player ID (`!set playerid <playerid>`)
 
-
-
-<h6>This bot probably might have no huge updates in the future bc im lowkey gatekeeping few things 🤤</h6>
-
 <h2>❗How to get Rolimons Token❗</h2>
 To get your _RoliVerification= you need Cookie editor addon like this: <br>
 https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm <br>
 <br>On Rolimons website open it and copy your _RoliVerification=
 <img width="630" height="520" alt="image" src="https://github.com/user-attachments/assets/6465d6bf-9419-4f29-9a1c-83dccfca714f" /><br>
+<br><br><br>
+<h6>This bot probably might have no huge updates in the future bc im lowkey gatekeeping few things 🤤</h6>
+
