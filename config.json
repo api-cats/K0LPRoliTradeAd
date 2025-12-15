@@ -1,6 +1,6 @@
 {
-    "TOKEN": "YourDiscordToken",
-    "RolimonsToken": "YourRolimonsToken",
+    "TOKEN": "",
+    "RolimonsToken": "",
     "PlayerID": 0,
     "DiscordChannel": 0,
     "AutoPick": "false",
@@ -30,5 +30,6 @@
         ]
     }
 }
+
 
 
