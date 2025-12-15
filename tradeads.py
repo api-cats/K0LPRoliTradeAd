@@ -439,13 +439,6 @@ async def SetAutopick(ctx):
     save_config_file(config_file)
     await ctx.send('✅ Top4 has been picked!')
 
-@set.command(name="rolitoken") #Set Rolimons Token
-async def SetRoliToken(ctx, *, arg: str = None):
-    config_file = load_config_file()
-    config_file["RolimonsToken"] = arg
-    save_config_file(config_file)
-    await ctx.send('✅ Rolimons Token has been set')
-
 @set.command(name="channel") #Set Discord Channel
 async def SetChannel(ctx, *, arg: str = None):
         config_file = load_config_file()
@@ -598,6 +591,53 @@ async def itemsrequestedclear(ctx, *, arg: str = None):
     save_config_file(config_file)
     await ctx.send("✅ Requested Items have been cleared!")
 
+
+@bot.command(name="rolisetup", invoke_without_command=True)
+async def set(ctx, *, arg: str = None):
+    config_file = load_config_file()
+    if arg == "phrase":
+        if config_file["PlayerID"] != 0:
+            responseRV = requests.get(f'https://api.rolimons.com/auth/v1/getphrase/{config_file["PlayerID"]}')
+            resRV = responseRV.json()
+            await ctx.send(f'Heres your phrase:\n`{resRV["phrase"]}`')
+            await ctx.send(f'Paste it on your profile or [Rolimons game](https://www.roblox.com/games/10299209169/)')
+            await ctx.send(f'Use `!rolisetup game/profile` after pasting ur phase')
+        else:
+            await ctx.send('❌ You need to add your Playerid! `!set playerid <number>`')
+    
+    elif arg == "profile":
+        if config_file["PlayerID"] != 0:
+            responseRPV = requests.post(f"https://api.rolimons.com/auth/v1/verifyphrase/{config_file['PlayerID']}")
+            resRPV = responseRPV.json()
+            print(resRPV)
+            if resRPV.get("success"):
+                await ctx.send("✅ Your Rolimons account has been added!")
+                config_file["RolimonsToken"] = ""
+                config_file["RolimonsToken"] = (f'{responseRGV.cookies.get("_RoliVerification")}')
+                save_config_file(config_file)
+            if resRPV.get("code") == 7114:
+                await ctx.send("❌ Rolimons doesnt see your phrase! If its on your Roblox profile then try again soon!")
+        else:
+            await ctx.send('❌ You need to add your Playerid! `!set playerid <number>`')
+
+    elif arg == "game":
+        if config_file["PlayerID"] != 0:
+            responseRGV = requests.post(f"https://api.rolimons.com/auth/v1/confirmgamephraseverification/{config_file['PlayerID']}")
+            resRGV = responseRGV.json()
+            await ctx.send(resRGV)
+            if resRGV.get("success"):
+                await ctx.send("✅ Your Rolimons account has been added!")
+                config_file["RolimonsToken"] = ""  
+                config_file["RolimonsToken"] = (f'{responseRGV.cookies.get("_RoliVerification")}')
+                save_config_file(config_file)
+            if resRGV.get("code") == 7114:
+                await ctx.send("❌ Rolimons doesnt see your phrase! try again soon!")
+        else:
+            await ctx.send('❌ You need to add your Playerid! `!set playerid <number>`')
+    else:
+        await ctx.send("❌ To get your phrase type `!rolisetup phrase`")
+
+        
 #Help command
 bot.remove_command('help')
 @bot.group(name="help", invoke_without_command=True)
@@ -608,6 +648,7 @@ async def help(ctx):
         color=0x33cc66
     )
     nftembed.add_field(name="config", value="", inline=False)
+    nftembed.add_field(name="rolisetup", value="phrase/profile/game", inline=False)
     nftembed.add_field(name="items/item:", value="offered/o or requested/r \n- `add/a <id/name>`\n- `remove/r <id/name>`\n- `clear`\n", inline=False)
     nftembed.add_field(name="nft", value='`add/a <id/name>`\n`remove/r <id/name>`\n`clear`\n`list`', inline=False)
     nftembed.add_field(name="tags/tag", value="`add/a <tag>`\n`remove/r <tag>`\n`set <preset>`\n`clear`\n`list`\n", inline=False)
@@ -615,10 +656,10 @@ async def help(ctx):
     await ctx.send(embed=nftembed)
 
 #Hello again someone
-#Last change of discord bot was on 11/12/2025 :P (dd/mm)
+#Last change of discord bot was on 2025/12/15 :P
 
 #Start of Trade Ad maker
-#Started working on this on 21/09/2025 :D (dd/mm)
+#Started working on this on 2025/09/21 :D
 async def trade_ad_loop():
     while True:
         config_file = load_config_file()
@@ -630,7 +671,7 @@ async def trade_ad_loop():
         if channel_id != 0:
             channel = bot.get_channel(channel_id)
         else:
-            print("⚠️  Discord Channel not found! Check if you typed correct id or use !set channel <id> to set it!")
+            print("Discord Channel not found!\nCheck if you typed correct id or use !set channel <id> to set it!")
 
         data = {
             "offer_item_ids": config_file["OfferedItems"],
@@ -670,8 +711,7 @@ async def trade_ad_loop():
                     ItemValues.append((ItemID, value, rap))
             if config_file["Top4"] == "true":
                 Top4List = [ItemID for ItemID, _, _ in sorted(ItemValues, key=lambda x: x[1], reverse=True)[:4]]
-                data["offer_item_ids"] = Top4List
-            
+                data["offer_item_ids"] = Top4List           
             elif config_file["AutoPick"] == "true":
                 if len(ItemValues) >= 4:
                     AutoPickList = [ItemID for ItemID, _, _ in sorted(random.sample(ItemValues, 4), key=lambda x: x[1], reverse=True)]
@@ -687,20 +727,22 @@ async def trade_ad_loop():
             config_file["Tags"] = config_file["Presets"]["default"]
             data["request_tags"] = config_file["Presets"]["default"]
             save_config_file(config_file)
-            await channel.send('❌ There are no tags or items set 🤬 Changed tags to default tho 🤤 @everyone')
-
+            if channel != 0:
+                await channel.send('❌ There are no tags or items set 🤬 Changed tags to default tho 🤤 @everyone')
         if len(config_file["Tags"]) + len(config_file["RequestedItems"]) >4:
             if len(config_file["RequestedItems"]) >1:
                 config_file["Tags"] = []
                 data["request_tags"] = []
                 save_config_file(config_file)
-                await channel.send('❌ Tags have been removed, Dont make trade ads when tags + items requested > 4 @everyone')
+                if channel != 0:
+                    await channel.send('❌ Tags have been removed, Dont make trade ads when tags + items requested > 4 @everyone')
             else:
                 config_file["RequestedItems"] = []
                 config_file["Tags"] = config_file["default"]
                 data["request_tags"] = config_file["default"]
                 save_config_file(config_file)
-                await channel.send('❌ Items requested have been removed and tags set to default. Dont make trade ads when tags + items requested > 4 @everyone')
+                if channel != 0:
+                    await channel.send('❌ Items requested have been removed and tags set to default. Dont make trade ads when tags + items requested > 4 @everyone')
 
         #Sends trade ad 
         responseTA = requests.post(urlTA, json=data, headers=headers)
@@ -710,7 +752,6 @@ async def trade_ad_loop():
             TradeMode=""
             TotalValue = 0
             TotalRap = 0
-            OffItems = []
             OffItemslist =[]
 
             if config_file["Top4"] == "true":
@@ -765,10 +806,10 @@ async def trade_ad_loop():
                 Logs += (f"🔍 Tags:\n{TagsText}\n")
 
             if config_file["Robux"] > 0:
-                Logs += (f"💲 Robux: {config_file["Robux"]}\n\n")
+                Logs += (f'💲 Robux: {config_file["Robux"]}\n\n')
 
             future_time = datetime.now() + timedelta(seconds=config_file["Time"])   
-            Logs +=(f"🕒 Next Trade Ad will be posted in: {config_file["Time"] / 60} minutes, Aka: {future_time.strftime('%H:%M')}\n")
+            Logs +=(f'🕒 Next Trade Ad will be posted in: {config_file["Time"] / 60} minutes, Aka: {future_time.strftime("%H:%M")}\n')
 
             #Sends Trade ad into discord channel and terminal
             print(Logs)
@@ -806,29 +847,31 @@ async def trade_ad_loop():
         await asyncio.sleep(int(config_file["Time"]))
 
 #Hello hello again
-#Last change of Trade Ad Thingy was on 11/12/2025 :P (dd/mm)
-
-#Errors
-@bot.event
-async def on_command_error(ctx, error):
-    print("Command error:", error)
-
-#Starts Trade Ad Thingy when discord bot loads
-@bot.event
-async def on_ready():
-    bot.loop.create_task(trade_ad_loop()) 
+#Last change of Trade Ad Thingy was on 2025/12/15 :P 
 
 #Token
 config_file = load_config_file()
 
 TOKEN = config_file["TOKEN"]
 
+#Errors
+@bot.event
+async def on_command_error(ctx, error):
+    print("Command error:", error)
+
+
+#Starts Trade Ad Thingy when discord bot loads
+@bot.event
+async def on_ready():
+    if config_file["PlayerID"] != 0:
+        bot.loop.create_task(trade_ad_loop())
+    else:
+        print('YOU NEED TO ADD YOUR PLAYER ID\nUse `!set playerid <id>`')
+
+
 if __name__ == "__main__":
     if not TOKEN:
         print("No discord token plz fix")
+        input("")
     else:
         bot.run(TOKEN)
-
-
-
-
