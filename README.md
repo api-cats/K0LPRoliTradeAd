@@ -38,20 +38,15 @@ At the moment only '!help' will help you :C<br>
 <img width="800" height="300" alt="image" src="https://github.com/user-attachments/assets/7bccf870-1fb0-4551-8b12-683682c57896" />
 
 
-- I recommend to also get an app like Visual Studio Code so you can see errors if there are any
-- Edit your config file and paste AT LEAST your:
-  <br>❗These arent valid so dont use them❗
-  <br>❗Dont remove (") and (,) from the config file❗<br>
-- Discord Bot Token:<br>
-  Example "TOKEN": "MJGR8IJGRJOFIJDdfsMg.AeedsgS.g3j2gi2dBMz4g4fd454gd3576346_B",<br>
-- Roblox User ID: <br>
-  Example: "PlayerID": 1067821187, <br>
-- Rolimons Cookie: <br>
-  Example "RolimonsToken": "9FDH9shffsfSDUYG87ysgf8GFSyfuJ9.eaJ2ZXJzaW9uIfJWFJ983HF43HGUYHDFGUSYGUYSDGJpZCI6MTA2NzgyMTE444xNzcwMTQ3MdfQ.qlUbTr4j4gADJiojoijeefeGEDGBxc", <br>
-
-- When you do that you should be able to run tradeads.py :D
-
 <h2>❗How to get Rolimons Cookie❗</h2>
+Use !rolisetup phrase to get your rolimons verification phrase.<br>
+Next, copy your phrase and paste it in your profile bio or [rolimons game](https://www.roblox.com/games/10299209169/Rolimons-Verification)<br>
+After that, type !rolisetup profile if you pasted it in your profile bio or !rolisetup game if you pasted it in rolimons game. <br>
+If you have done that correctly you should get a message confirming that. <br>
+If somehow this method didnt work you can do the other method.
+
+
+<h2>Alternatively you can edit in your config file:</h2>
 To get your _RoliVerification= you need Cookie editor addon like this: <br>
 https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm <br>
 <br>On Rolimons website open it and copy your _RoliVerification=
