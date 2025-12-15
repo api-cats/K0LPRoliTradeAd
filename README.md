@@ -40,13 +40,13 @@ At the moment only '!help' will help you :C<br>
 
 <h2>❗How to get Rolimons Cookie❗</h2>
 Use !rolisetup phrase to get your rolimons verification phrase.<br>
-Next, copy your phrase and paste it in your profile bio or [rolimons game](https://www.roblox.com/games/10299209169/Rolimons-Verification)<br>
+Next, copy your phrase and paste it in your profile bio or in rolimons game (https://www.roblox.com/games/10299209169/Rolimons-Verification)<br>
 After that, type !rolisetup profile if you pasted it in your profile bio or !rolisetup game if you pasted it in rolimons game. <br>
 If you have done that correctly you should get a message confirming that. <br>
 If somehow this method didnt work you can do the other method.
 
 
-<h2>Alternatively you can edit in your config file:</h2>
+<h3>The other method</h3>
 To get your _RoliVerification= you need Cookie editor addon like this: <br>
 https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm <br>
 <br>On Rolimons website open it and copy your _RoliVerification=
