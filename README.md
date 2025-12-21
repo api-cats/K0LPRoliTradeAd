@@ -40,9 +40,6 @@ At the moment only '!help' will help you :C<br>
 <img width="800" height="500" alt="image" src="https://github.com/user-attachments/assets/9b2914bb-503d-4051-a9d5-7b240657d179" />
 
 
-- Get a Discord Bot invite link and invite it to your server
-<br>https://youtube.com/clip/UgkxVbFqif0fQdPVUWKkz5qelvo1PnPwJ9eH?si=M_DX5bDQQV-Ccjla
-
 <h2>❗How to get Rolimons Cookie❗</h2>
 Use !rolisetup phrase to get your rolimons verification phrase.<br>
 Next, copy your phrase and paste it in your profile bio or in rolimons game (https://www.roblox.com/games/10299209169/Rolimons-Verification)<br>
