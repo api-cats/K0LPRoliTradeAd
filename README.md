@@ -54,5 +54,5 @@ https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfdd
 <br>On Rolimons website open it and copy your _RoliVerification=
 <img width="630" height="520" alt="image" src="https://github.com/user-attachments/assets/6465d6bf-9419-4f29-9a1c-83dccfca714f" /><br>
 <br><br><br>
-<h6>Fixes, small changes and Documentation updates might be comming soon. Dont expect for new features bc i might be gatekeping few for myself 😜</h6><h6>Kinda a shoutout to people behind Mr. Robot bc it motivated me to code :P</h6>
+<h6>Fixes, small changes/features and Documentation updates are comming. Some features like automatically picking requested items will NEVER be released publicly bc i dont want to polute trade ads :P </h6><h6>Kinda a shoutout to people behind Mr. Robot bc it motivated me to code C:</h6>
 
