@@ -22,4 +22,4 @@ Made to be running in the background 24/7. Update with code are coming next week
 - Your <b>ROLIMONS<b> Cookie
 - Your Roblox User ID
 
-<h6>Features like automatically picking requested items will NEVER be released publicly bc i dont want to polute trade ads :P </h6><h6>Kinda a shoutout to people behind Mr. Robot bc it motivated me to code C:</h6>
+<h6>Features like automatically picking requested items will NEVER be released publicly bc i dont want to polute trade ads with absolute crap :P </h6>
