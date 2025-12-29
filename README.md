@@ -1,4 +1,4 @@
-Made to be running in the background 24/7. Update with code are coming next week + new command. <br> If there are bugs in my code dm me on discord: k0lp. ❗Dont ask for help with setting it up, ask AI plz C:❗
+Made to be running in the background 24/7. Big update with !inv command this week. <br> If there are bugs in my code dm me on discord: k0lp. ❗Dont ask for help with setting it up, ask AI plz C:❗
 <h1>Rolimons Automatic Trade Ad Bot</h1>
 <img width="500" height="600" alt="image" src="https://github.com/user-attachments/assets/64b6fa99-f725-47b0-a806-dd09d8a37b23" /><br>
 <img width="500" height="200" alt="image" src="https://github.com/user-attachments/assets/7e32eaa9-fc8c-43a6-a732-56f0dba79176" />
