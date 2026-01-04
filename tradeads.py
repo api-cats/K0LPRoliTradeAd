@@ -85,7 +85,7 @@ async def NFTAdd(ctx, *, arg: str = None):
     config_file = load_config_file()
     if arg.isnumeric():
         if int(arg) in config_file["NotForTrade"]:
-            config_file["NotForTrade"].remove(int(arg))
+            config_file["NotForTrade"].append(int(arg))
             save_config_file(config_file)  
             await ctx.send(f'✅ {arg} has been added to NFT List!')
         else:
@@ -886,6 +886,7 @@ if __name__ == "__main__":
         input("")
     else:
         bot.run(TOKEN)
+
 
 
 
