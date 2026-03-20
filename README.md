@@ -1,3 +1,4 @@
+code ass i dont suggest to use it too 👀
 <h1>Alternative?</h1>
 https://www.roblox.com/games/14090982817
 <h1>Why page nuked ?!</h1>
